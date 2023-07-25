@@ -21,13 +21,13 @@ public class ScoreController {
     @Autowired
     private ScoreService scoreService;
     @GetMapping
-//    @RolesAllowed({"TEACHER","Score"})
+//    @RolesAllowed({"TEACHER","STUDENT"})
     public ResponseEntity<List<Score>> getAllScore() {
         List<Score> Scores = scoreService.getAllScore();
         return new ResponseEntity<>(Scores, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-//    @RolesAllowed({"TEACHER","Score"})
+//    @RolesAllowed({"TEACHER","STUDENT"})
     public ResponseEntity<Score> getUserById(@PathVariable String name) {
         Score score = scoreService.getScoreByCourseName(name);
         if (score != null) {
@@ -37,13 +37,13 @@ public class ScoreController {
         }
     }
     @PostMapping
-//    @RolesAllowed({"TEACHER","Score"})
+//    @RolesAllowed({"TEACHER","STUDENT"})
     public ResponseEntity<Score> createUserWithRole(@RequestBody ScoreDTO scoreDTO) {
 //        scoreService.addScore(score);
         return ResponseEntity.status(HttpStatus.CREATED).body(scoreService.addScore(scoreDTO));
     }
     @PutMapping("/{id}")
-    @RolesAllowed({"TEACHER","Score"})
+    @RolesAllowed({"TEACHER","STUDENT"})
     public ResponseEntity<Score> updateUser(@RequestBody Score score,@PathVariable String name) {
         Score updatedScore = scoreService.updateScoreByCourseName(score,name);
         if (updatedScore != null) {
@@ -53,7 +53,7 @@ public class ScoreController {
         }
     }
     @DeleteMapping("/{id}")
-//    @RolesAllowed({"TEACHER","Score"})
+//    @RolesAllowed({"TEACHER","STUDENT"})
     public void deleteScore(@PathVariable String name) {
         scoreService.deleteScore(name);
     }
