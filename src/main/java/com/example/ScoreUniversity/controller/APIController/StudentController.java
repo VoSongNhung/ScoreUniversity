@@ -38,14 +38,14 @@ public class StudentController {
     @PostMapping
 //    @RolesAllowed({"TEACHER","STUDENT"})
     public ResponseEntity<UserRepresentation> createUserWithRole(@RequestBody UserRepresentation userRepresentation, String roleName) {
-        UserRepresentation userrep = studentService.createStudentWithRole(userRepresentation,"ROLE_USER");
+        UserRepresentation userrep = studentService.createStudentWithRole(userRepresentation,"STUDENT");
         Student student = new Student();
         student.setId(userrep.getId());
         student.setFirstName(userRepresentation.getFirstName());
         student.setLastName(userRepresentation.getLastName());
         student.setUsername(userRepresentation.getUsername());
         student.setEmail(userRepresentation.getEmail());
-        student.setRoles("USER_ROLE");
+        student.setRoles("STUDENT");
         studentRepo.save(student);
         return ResponseEntity.status(HttpStatus.CREATED).body(userrep);
     }
